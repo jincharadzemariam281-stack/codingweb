@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevStart — ისწავლე პროგრამირება ნულიდან | Advanced Coding Platform</title>
+  <meta name="description" content="თანამედროვე ინტერაქტიული პლატფორმა დამწყებთათვის: ისწავლე კოდირება პრაქტიკით, შექმენი რეალური პროექტები და გახდი დეველოპერი ნულიდან.">
+
+  <!-- Google Fonts: Noto Sans Georgian & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+Georgian:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-light">
+
+  <!-- NOISE TEXTURE OVERLAY FOR HIGH-END EDITORIAL FINISH -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ADVANCED WORDS PRELOADER WITH PERCENTAGE & SPRING ANIMATION -->
+  <div id="preloader" class="preloader" aria-hidden="false" role="dialog" aria-label="საიტი იტვირთება">
+    <div class="preloader-backdrop"></div>
+    <div class="preloader-card">
+      <div class="preloader-brand">
+        <span class="brand-chip">DevStart &bull; 2026 Studio</span>
+      </div>
+
+      <div class="preloader-kinetic-text">
+        <span class="preloader-label">ნაბიჯი პირველი:</span>
+        <div class="words-container" id="wordsContainer">
+          <div class="word active" data-index="0">კოდირება</div>
+          <div class="word" data-index="1">ლოგიკა</div>
+          <div class="word" data-index="2">ალგორითმი</div>
+          <div class="word" data-index="3">შემოქმედება</div>
+          <div class="word" data-index="4">მომავალი</div>
+        </div>
+      </div>
+
+      <div class="preloader-meter-wrap">
+        <div class="preloader-meter-bar">
+          <div class="preloader-meter-fill" id="preloaderFill"></div>
+        </div>
+        <div class="preloader-stats">
+          <span class="preloader-status-text" id="preloaderStatus">გარემოს ინიციალიზაცია...</span>
+          <span class="preloader-count" id="preloaderCount">00%</span>
+        </div>
+      </div>
+
+      <button type="button" class="preloader-skip" id="skipPreloader">
+        <span>გამოტოვება</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE SVG SCROLL FOLLOWER & DYNAMIC HUD -->
+  <aside class="scroll-tracker-hud" aria-label="გვერდის გადახვევის ტრეკერი">
+    <div class="tracker-glass-pill">
+      <svg class="tracker-svg" viewBox="0 0 32 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background guide path -->
+        <path class="guide-path" d="M16 12 C16 90, 8 130, 16 180 C24 230, 16 270, 16 348" stroke="#D8A2A2" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 5" opacity="0.45"/>
+        <!-- Active animated gradient path -->
+        <path id="svgScrollTrail" class="active-path" d="M16 12 C16 90, 8 130, 16 180 C24 230, 16 270, 16 348" stroke="url(#scrollGradient)" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- Floating tracker bead -->
+        <circle id="scrollBead" cx="16" cy="12" r="6" fill="#8EA66B" stroke="#FFF9D6" stroke-width="2.5"/>
+        <defs>
+          <linearGradient id="scrollGradient" x1="16" y1="12" x2="16" y2="348" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#D8A2A2"/>
+            <stop offset="0.5" stop-color="#8EA66B"/>
+            <stop offset="1" stop-color="#6C8449"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="tracker-badge" id="trackerBadge">0%</div>
+    </div>
+  </aside>
+
+  <!-- FLOATING BACK TO TOP BUTTON WITH SVG RADIAL RING -->
+  <button id="backToTop" class="back-to-top" aria-label="გვერდის დასაწყისში დაბრუნება">
+    <svg class="progress-ring" width="46" height="46">
+      <circle class="ring-bg" cx="23" cy="23" r="19" stroke="#FFDCDC" stroke-width="3" fill="none"/>
+      <circle id="ringProgress" class="ring-fill" cx="23" cy="23" r="19" stroke="#8EA66B" stroke-width="3" fill="none"/>
+    </svg>
+    <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- FLOATING ULTRA-MODERN NAVBAR -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <div class="nav-shell">
+        <a href="#hero" class="brand-logo" aria-label="DevStart მთავარი გვერდი">
+          <div class="logo-mark">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <span class="logo-name">Dev<span class="name-accent">Start</span></span>
+          <span class="logo-version">v2.6</span>
+        </a>
+
+        <nav class="desktop-nav" id="desktopNav" aria-label="მთავარი ნავიგაცია">
+          <ul class="nav-links">
+            <li><a href="#about" class="nav-anchor">რას ისწავლი</a></li>
+            <li><a href="#features" class="nav-anchor">უპირატესობები</a></li>
+            <li><a href="#curriculum" class="nav-anchor">გეგმა</a></li>
+            <li><a href="#community" class="nav-anchor">სტუდენტები</a></li>
+            <li><a href="#contact" class="nav-anchor">კონტაქტი</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="#curriculum" class="btn-ghost-nav">პროგრამა</a>
+          <a href="#contact" class="btn-primary-nav">
+            <span>დაიწყე უფასოდ</span>
+            <span class="nav-btn-icon">&rarr;</span>
+          </a>
+          <button class="mobile-toggle" id="mobileToggle" aria-label="მენიუს გადართვა" aria-expanded="false">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE OVERLAY MENU -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-inner">
+      <ul class="drawer-links">
+        <li><a href="#about" class="drawer-link">რას ისწავლი</a></li>
+        <li><a href="#features" class="drawer-link">უპირატესობები</a></li>
+        <li><a href="#curriculum" class="drawer-link">სასწავლო გეგმა</a></li>
+        <li><a href="#community" class="drawer-link">სტუდენტები</a></li>
+        <li><a href="#contact" class="drawer-link">კონტაქტი</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <a href="#contact" class="btn-primary-nav btn-block">დაიწყე სწავლა უფასოდ &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- HERO SECTION WITH INTERACTIVE STUDIO & HOVER MEMBERS -->
+    <section class="hero-section" id="hero">
+      <div class="ambient-glow glow-1"></div>
+      <div class="ambient-glow glow-2"></div>
+
+      <div class="container hero-container">
+        
+        <div class="hero-header-block">
+          <div class="hero-chip-badge">
+            <span class="pulse-beacon"></span>
+            <span class="chip-text">სასწავლო პლატფორმა დამწყებთათვის • 2026</span>
+          </div>
+
+          <h1 class="hero-headline">
+            ისწავლე <span class="gradient-headline">პროგრამირება</span> ნულიდან, რეალური პრაქტიკით
+          </h1>
+
+          <p class="hero-subline">
+            არანაირი მოსაწყენი მათემატიკა ან მშრალი თეორია. დაწერე შენი პირველი კოდი 5 წუთში, 
+            მიიღე მყისიერი შედეგი ბრაუზერში და შექმენი საკუთარი პროექტების პორტფოლიო.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#contact" class="btn-hero-primary">
+              <span class="btn-label">დაიწყე სწავლა უფასოდ</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#curriculum" class="btn-hero-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>ნახე პროგრამა</span>
+            </a>
+          </div>
+
+          <!-- ADVANCED HOVER MEMBERS STACK & DYNAMIC PROFILE FLYOUT -->
+          <div class="hero-members-pill">
+            <div class="members-avatars-wrap">
+              
+              <div class="member-avatar-item" tabindex="0">
+                <div class="avatar-disc disc-olive">ნბ</div>
+                <div class="member-popover">
+                  <div class="popover-badge">სტუდენტის შედეგი</div>
+                  <strong>ნინო ბერიძე</strong>
+                  <span class="popover-role">Junior Frontend &bull; TBC Pay</span>
+                  <p>„ნულიდან დავიწყე და პირველი სამსახური 5 თვეში ვიპოვე.“</p>
+                  <div class="popover-stat">⭐ 4.9 შეფასება &bull; 8 პროექტი</div>
+                </div>
+              </div>
+
+              <div class="member-avatar-item" tabindex="0">
+                <div class="avatar-disc disc-rose">გკ</div>
+                <div class="member-popover">
+                  <div class="popover-badge">სტუდენტის შედეგი</div>
+                  <strong>გიორგი კაპანაძე</strong>
+                  <span class="popover-role">Fullstack Dev &bull; Freelancer</span>
+                  <p>„ბრაუზერში პირდაპირ წერამ უზარმაზარი დრო დამიზოგა.“</p>
+                  <div class="popover-stat">⭐ 5.0 შეფასება &bull; 12 პროექტი</div>
+                </div>
+              </div>
+
+              <div class="member-avatar-item" tabindex="0">
+                <div class="avatar-disc disc-butter">მჩ</div>
+                <div class="member-popover">
+                  <div class="popover-badge">სტუდენტის შედეგი</div>
+                  <strong>მარიამ ჩხაიძე</strong>
+                  <span class="popover-role">Python & Automation</span>
+                  <p>„მენტორების Code Review ყველაზე ფასეული გამოცდილებაა.“</p>
+                  <div class="popover-stat">⭐ 4.9 შეფასება &bull; 6 პროექტი</div>
+                </div>
+              </div>
+
+              <div class="member-avatar-item" tabindex="0">
+                <div class="avatar-disc disc-olive">სჯ</div>
+                <div class="member-popover">
+                  <div class="popover-badge">სტუდენტის შედეგი</div>
+                  <strong>სანდრო ჯაფარიძე</strong>
+                  <span class="popover-role">Web Developer</span>
+                  <p>„ძალიან მარტივად ხსნიან ურთულეს თემებსაც კი.“</p>
+                  <div class="popover-stat">⭐ 5.0 შეფასება &bull; 9 პროექტი</div>
+                </div>
+              </div>
+
+              <div class="avatar-disc disc-count">+4.2k</div>
+            </div>
+
+            <div class="members-text-group">
+              <div class="members-rating-line">
+                <span class="stars-gold">★★★★★</span>
+                <span class="rating-num">4.9 / 5.0</span>
+                <span class="verified-check">✓ დადასტურებული</span>
+              </div>
+              <p class="members-caption">4,200+ დამწყებმა უკვე დაწერა თავისი პირველი კოდი</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADVANCED INTERACTIVE CODE STUDIO COMPONENT -->
+        <div class="hero-studio-card">
+          <div class="floating-widget widget-left">
+            <span class="widget-icon">🔥</span>
+            <div>
+              <strong>14 დღიანი Streak</strong>
+              <small>ყოველდღიური პროგრესი</small>
+            </div>
+          </div>
+
+          <div class="floating-widget widget-right">
+            <span class="widget-icon">⚡</span>
+            <div>
+              <strong>120+ ხაზი დაწერილია</strong>
+              <small>მყისიერი ავტოტესტი</small>
+            </div>
+          </div>
+
+          <div class="studio-chrome">
+            <div class="studio-dots">
+              <span class="studio-dot dot-r"></span>
+              <span class="studio-dot dot-y"></span>
+              <span class="studio-dot dot-g"></span>
+            </div>
+
+            <div class="studio-tab-bar">
+              <button class="studio-tab active" id="tabJs" data-snippet="js">
+                <span class="tab-lang lang-js">JS</span>
+                <span>script.js</span>
+              </button>
+              <button class="studio-tab" id="tabHtml" data-snippet="html">
+                <span class="tab-lang lang-html">&lt;&gt;</span>
+                <span>card.html</span>
+              </button>
+            </div>
+
+            <button class="studio-run-trigger" id="runStudioCode" title="კოდის გაშვება">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>გაშვება</span>
+            </button>
+          </div>
+
+          <div class="studio-workspace">
+            <div class="studio-editor-pane">
+              <div class="line-numbers" aria-hidden="true">
+                <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+              </div>
+              <pre class="editor-code"><code id="studioCodeBox"><span class="c-comment">// 1. შევქმნათ მოსწავლის ობიექტი</span>
+<span class="c-keyword">const</span> <span class="c-var">learner</span> = {
+  <span class="c-prop">name</span>: <span class="c-str">"დამწყები დეველოპერი"</span>,
+  <span class="c-prop">isReady</span>: <span class="c-bool">true</span>,
+  <span class="c-prop">goal</span>: <span class="c-str">"პირველი ვებსაიტი"</span>
+};
+
+<span class="c-keyword">function</span> <span class="c-fn">buildProject</span>(<span class="c-param">user</span>) {
+  <span class="c-keyword">return</span> <span class="c-str">`🎉 ${user.name}: პირველი კოდი წარმატებით გაეშვა!`</span>;
+}
+
+<span class="c-fn">console</span>.<span class="c-fn">log</span>(<span class="c-fn">buildProject</span>(learner));</code></pre>
+            </div>
+
+            <div class="studio-terminal-pane">
+              <div class="terminal-bar">
+                <span class="terminal-status-light"></span>
+                <span>Console &bull; Interactive Output</span>
+              </div>
+              <div class="terminal-output" id="studioTerminal">
+                <div class="term-line prompt"><span class="term-arrow">&gt;</span> მზადაა. დააჭირე <strong>„გაშვება“</strong> ღილაკს...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="studio-footer-status">
+            <div class="footer-status-pill">
+              <span class="dot-live"></span>
+              <span>Node.js v20 / ES2024 Runtime</span>
+            </div>
+            <span class="footer-latency">0ms Latency</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION: DETAILED BREAKDOWN OF WHAT THEY LEARN -->
+    <section class="about-section" id="about">
+      <div class="container">
+        
+        <div class="section-head text-center">
+          <span class="section-tag-pill">რას შეისწავლი</span>
+          <h2 class="section-title-large">ყველაფერი, რაც პროგრამირების დასაწყებად გჭირდება</h2>
+          <p class="section-desc">
+            პროგრამა შექმნილია მათთვის, ვისაც არანაირი ტექნიკური გამოცდილება არ აქვს. 
+            თითოეული ნაბიჯი ლოგიკურია და მიმართულია რეალური შედეგისკენ.
+          </p>
+        </div>
+
+        <div class="curriculum-container" id="curriculum">
+          <div class="curriculum-steps-grid">
+
+            <!-- Step 1 -->
+            <div class="step-card spotlight-card">
+              <div class="step-card-glass"></div>
+              <div class="step-meta">
+                <span class="step-badge">მოდული 01</span>
+                <span class="step-duration">3 კვირა</span>
+              </div>
+              <div class="step-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <h3 class="step-heading">ვებ-ტექნოლოგიების საფუძვლები</h3>
+              <p class="step-text">
+                როგორ მუშაობს ინტერნეტი და როგორ იქმნება საიტები HTML5-ითა და თანამედროვე CSS3-ით. 
+                ისწავლი Flexbox-ს, CSS Grid-ს და ადაპტურ დიზაინს ნებისმიერი ეკრანისთვის.
+              </p>
+              <div class="step-tags">
+                <span class="tech-tag">HTML5 სემანტიკა</span>
+                <span class="tech-tag">CSS Grid & Flex</span>
+                <span class="tech-tag">მობილური დიზაინი</span>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card spotlight-card">
+              <div class="step-card-glass"></div>
+              <div class="step-meta">
+                <span class="step-badge">მოდული 02</span>
+                <span class="step-duration">4 კვირა</span>
+              </div>
+              <div class="step-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h3 class="step-heading">ინტერაქტიული JavaScript & ლოგიკა</h3>
+              <p class="step-text">
+                გააცოცხლე შენი ვებსაიტი. გაიგე ცვლადები, ფუნქციები, ციკლები, 
+                DOM მანიპულაცია და მოვლენების მართვა. ისწავლი, როგორ ფიქრობს კომპიუტერი.
+              </p>
+              <div class="step-tags">
+                <span class="tech-tag">ალგორითმები</span>
+                <span class="tech-tag">DOM მანიპულაცია</span>
+                <span class="tech-tag">Event Listeners</span>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card spotlight-card">
+              <div class="step-card-glass"></div>
+              <div class="step-meta">
+                <span class="step-badge">მოდული 03</span>
+                <span class="step-duration">3 კვირა</span>
+              </div>
+              <div class="step-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <h3 class="step-heading">პითონი და ამოცანების ამოხსნა</h3>
+              <p class="step-text">
+                ყველაზე მეგობრული ენა დამწყებთათვის: მონაცემთა სტრუქტურები, 
+                ფაილებთან მუშაობა, API-ებთან კავშირი და მცირე ავტომატიზაციების აწყობა.
+              </p>
+              <div class="step-tags">
+                <span class="tech-tag">Python სინტაქსი</span>
+                <span class="tech-tag">ავტომატიზაცია</span>
+                <span class="tech-tag">მონაცემები</span>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card spotlight-card">
+              <div class="step-card-glass"></div>
+              <div class="step-meta">
+                <span class="step-badge">მოდული 04</span>
+                <span class="step-duration">2 კვირა</span>
+              </div>
+              <div class="step-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <h3 class="step-heading">Git, GitHub & პორტფოლიოს აწყობა</h3>
+              <p class="step-text">
+                როგორ შეინახო კოდი პროფესიონალურად Git-ით, ატვირთო GitHub-ზე და 
+                გაუშვა პირდაპირი ცოცხალი საიტი GitHub Pages-ზე დამსაქმებლებისთვის.
+              </p>
+              <div class="step-tags">
+                <span class="tech-tag">Git ვერსიები</span>
+                <span class="tech-tag">GitHub Pages</span>
+                <span class="tech-tag">მზა პორტფოლიო</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION: 3 ADVANCED SPOTLIGHT CARDS AS REQUESTED -->
+    <section class="features-section" id="features">
+      <div class="container">
+        
+        <div class="section-head text-center">
+          <span class="section-tag-pill">3 მთავარი უპირატესობა</span>
+          <h2 class="section-title-large">რატომ არის ჩვენი მეთოდი ეფექტური?</h2>
+          <p class="section-desc">
+            სწავლის თანამედროვე სტანდარტები, რომლებიც დაგეხმარება პირველივე დღიდან შედეგის მიღწევაში.
+          </p>
+        </div>
+
+        <div class="features-three-grid">
+
+          <!-- CARD 1 -->
+          <article class="feature-spotlight-card card-flavor-rose spotlight-card">
+            <div class="spotlight-layer"></div>
+            <div class="card-top-row">
+              <div class="card-icon-glass">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                  <circle cx="8" cy="10" r="1.5"></circle>
+                  <circle cx="12" cy="10" r="1.5"></circle>
+                  <circle cx="16" cy="10" r="1.5"></circle>
+                </svg>
+              </div>
+              <span class="feature-pill-badge">01 &bull; პრაქტიკა</span>
+            </div>
+
+            <h3 class="feature-title">ინტერაქტიული პრაქტიკა ბრაუზერში</h3>
+            <p class="feature-text">
+              დაივიწყე რთული პროგრამების ხანგრძლივი ინსტალაცია, ტერმინალში გაჭედვა და გარემოს შეცდომები. 
+              წერ კოდს პირდაპირ ბრაუზერში და რეალურ დროში ხედავ, როგორ ცოცხლდება შენი პირველი საიტი.
+            </p>
+
+            <div class="feature-bullets">
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>მყისიერი ავტომატური ტესტირება და შეფასება</span>
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>შეცდომების მარტივი და მეგობრული ქართული ახსნა</span>
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>200+ პრაქტიკული მინი-სავარჯიშო</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="feature-spotlight-card card-flavor-olive spotlight-card">
+            <div class="spotlight-layer"></div>
+            <div class="card-top-row">
+              <div class="card-icon-glass">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <span class="feature-pill-badge">02 &bull; მენტორობა</span>
+            </div>
+
+            <h3 class="feature-title">მენტორების მუდმივი მხარდაჭერა</h3>
+            <p class="feature-text">
+              დამწყების მთავარი დაბრკოლება კითხვებზე პასუხის არქონაა. 
+              ჩვენი გამოცდილი დეველოპერები პირადად ამოწმებენ შენს კოდს, გაძლევენ რჩევებს და გეხმარებიან საუკეთესო პრაქტიკების ათვისებაში.
+            </p>
+
+            <div class="feature-bullets">
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>პერსონალური Code Review ყოველ კვირას</span>
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>კითხვა-პასუხის ცოცხალი სესიები და გარჩევები</span>
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>აქტიური და მეგობრული Discord საზოგადოება</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="feature-spotlight-card card-flavor-butter spotlight-card">
+            <div class="spotlight-layer"></div>
+            <div class="card-top-row">
+              <div class="card-icon-glass">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+              <span class="feature-pill-badge">03 &bull; კარიერა</span>
+            </div>
+
+            <h3 class="feature-title">რეალური პროექტების პორტფოლიო</h3>
+            <p class="feature-text">
+              დამსაქმებლებს აინტერესებთ არა სერტიფიკატები, არამედ ის, თუ რა შეგიძლია ააწყო. 
+              კურსის ბოლოს გექნება 5 დასრულებული რეალური აპლიკაცია GitHub-ზე, რომლებსაც სიამაყით წარუდგენ კომპანიებს.
+            </p>
+
+            <div class="feature-bullets">
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>მრავალფუნქციური ინტერაქტიული ვებ-აპლიკაციები</span>
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>სუფთა, დოკუმენტირებული კოდი GitHub-ზე</span>
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>მზადყოფნა Junior დეველოპერის ვაკანსიებისთვის</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY SECTION: STUDENT STORIES WITH INTERACTIVE CARDS -->
+    <section class="community-section" id="community">
+      <div class="container">
+        
+        <div class="community-box">
+          <div class="section-head text-center">
+            <span class="section-tag-pill">ჩვენი საზოგადოება</span>
+            <h2 class="section-title-large">ნახე, როგორ დაიწყეს მათ ნულიდან</h2>
+            <p class="section-desc">
+              გადაატარე მაუსი სტუდენტების ბარათებზე და გაიგე მათი ისტორიები:
+            </p>
+          </div>
+
+          <div class="community-testimonials-grid">
+            
+            <div class="testimonial-card spotlight-card" tabindex="0">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar avatar-bg-olive">ნბ</div>
+                <div>
+                  <h3 class="testimonial-name">ნინო ბერიძე</h3>
+                  <span class="testimonial-role">ყოფილი ეკონომისტი &bull; Frontend</span>
+                </div>
+                <div class="online-indicator" title="ონლაინშია"></div>
+              </div>
+              <p class="testimonial-body">
+                „პროგრამირება ყოველთვის მიუწვდომელი მეგონა. DevStart-ზე პირველივე დღეს დავწერე ჩემი საიტი. დღეს უკვე რეალურ კომპანიაში ვმუშაობ.“
+              </p>
+              <div class="testimonial-meta">
+                <span class="project-count">🏆 8 დასრულებული პროექტი</span>
+                <span class="verified-pill">გავლილია</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card spotlight-card" tabindex="0">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar avatar-bg-rose">სგ</div>
+                <div>
+                  <h3 class="testimonial-name">სანდრო გიორგაძე</h3>
+                  <span class="testimonial-role">სტუდენტი &bull; JavaScript Dev</span>
+                </div>
+                <div class="online-indicator" title="ონლაინშია"></div>
+              </div>
+              <p class="testimonial-body">
+                „ყველაზე მეტად ბრაუზერში მუშაობის სიმარტივემ და მენტორების 24/7 მხარდაჭერამ მომხიბლა. შეცდომის დაშვების აღარ მეშინია.“
+              </p>
+              <div class="testimonial-meta">
+                <span class="project-count">🏆 6 დასრულებული პროექტი</span>
+                <span class="verified-pill">გავლილია</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card spotlight-card" tabindex="0">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar avatar-bg-butter">თმ</div>
+                <div>
+                  <h3 class="testimonial-name">თამარ მაისურაძე</h3>
+                  <span class="testimonial-role">დიზაინერი &bull; Full-Stack Learner</span>
+                </div>
+                <div class="online-indicator" title="ონლაინშია"></div>
+              </div>
+              <p class="testimonial-body">
+                „როცა შენს დიზაინს კოდში თვითონ აცოცხლებ, საოცარი გრძნობაა. კურსმა შემძინა თავდაჯერებულობა და ტექნიკური სიღრმე.“
+              </p>
+              <div class="testimonial-meta">
+                <span class="project-count">🏆 10 დასრულებული პროექტი</span>
+                <span class="verified-pill">გავლილია</span>
+              </div>
+            </div>
+
+            <div class="testimonial-card spotlight-card" tabindex="0">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar avatar-bg-olive">ლკ</div>
+                <div>
+                  <h3 class="testimonial-name">ლუკა კვარაცხელია</h3>
+                  <span class="testimonial-role">მოსწავლე &bull; Python Enthusiast</span>
+                </div>
+                <div class="online-indicator" title="ონლაინშია"></div>
+              </div>
+              <p class="testimonial-body">
+                „გაკვეთილები მოკლეა, გასაგები და პირდაპირ საქმეზე ორიენტირებული. მშრალი თეორიის გარეშე ყველაფერი ბევრად მარტივია.“
+              </p>
+              <div class="testimonial-meta">
+                <span class="project-count">🏆 5 დასრულებული პროექტი</span>
+                <span class="verified-pill">გავლილია</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION (საკონტაქტო ნაწილი) -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-card-frame spotlight-card">
+          <div class="contact-layout">
+
+            <div class="contact-copy-col">
+              <span class="section-tag-pill">დაგვიკავშირდი</span>
+              <h2 class="contact-main-heading">მზად ხარ დაიწყო შენი პირველი ნაბიჯი?</h2>
+              <p class="contact-lead-text">
+                დარეგისტრირდი უფასო საცდელ გაკვეთილზე ან მოგვწერე ნებისმიერი კითხვა. 
+                ჩვენი მენტორები დაგეხმარებიან შენთვის ოპტიმალური სასწავლო მიმართულების შერჩევაში.
+              </p>
+
+              <div class="perks-list">
+                <div class="perk-box">
+                  <div class="perk-glyph">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 14 14"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="perk-title">სწრაფი პასუხი 24 საათში</h4>
+                    <p class="perk-sub">ჩვენი მენტორები დეტალურად გიპასუხებენ ნებისმიერ შეკითხვაზე.</p>
+                  </div>
+                </div>
+
+                <div class="perk-box">
+                  <div class="perk-glyph">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="perk-title">100% უფასო საცდელი მოდული</h4>
+                    <p class="perk-sub">გაიარე პირველი გაკვეთილები საბანკო ბარათისა და ვალდებულებების გარეშე.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-quick-links">
+                <a href="mailto:info@devstart.ge" class="quick-link-chip">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  <span>info@devstart.ge</span>
+                </a>
+                <a href="#" class="quick-link-chip">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                  </svg>
+                  <span>Discord Community</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- CONTACT INTERACTIVE FORM -->
+            <div class="contact-form-col">
+              <form class="glass-form" id="contactForm" novalidate>
+                <div class="field-wrap">
+                  <label for="fullName" class="field-label">სახელი და გვარი *</label>
+                  <input type="text" id="fullName" class="field-input" placeholder="მაგ: გიორგი ბერიძე" required autocomplete="name">
+                  <span class="field-error" id="nameError">გთხოვთ შეიყვანოთ სახელი</span>
+                </div>
+
+                <div class="field-wrap">
+                  <label for="emailAddr" class="field-label">ელ-ფოსტა *</label>
+                  <input type="email" id="emailAddr" class="field-input" placeholder="giorgi@example.ge" required autocomplete="email">
+                  <span class="field-error" id="emailError">გთხოვთ მიუთითოთ სწორი ელ-ფოსტა</span>
+                </div>
+
+                <div class="field-wrap">
+                  <label for="courseChoice" class="field-label">სასურველი მიმართულება</label>
+                  <select id="courseChoice" class="field-select">
+                    <option value="web-basics">ნულიდან: ვებ-ტექნოლოგიები (HTML/CSS)</option>
+                    <option value="js-logic">ინტერაქტიული JavaScript & ლოგიკა</option>
+                    <option value="python">Python დამწყებთათვის</option>
+                    <option value="consult">ჯერ არ გადამიწყვეტია, მინდა კონსულტაცია</option>
+                  </select>
+                </div>
+
+                <div class="field-wrap">
+                  <label for="userMsg" class="field-label">შეტყობინება (არასავალდებულო)</label>
+                  <textarea id="userMsg" class="field-textarea" rows="3" placeholder="რა არის შენი მთავარი მოტივაცია ან შეკითხვა?"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit-hero" id="submitButton">
+                  <span>უფასო რეგისტრაცია &rarr;</span>
+                </button>
+
+                <p class="form-fineprint">
+                  რეგისტრაციით თქვენ ეთანხმებით პერსონალური მონაცემების დაცვის პოლიტიკას.
+                </p>
+              </form>
+
+              <!-- SUCCESS CELEBRATION TOAST -->
+              <div class="feedback-toast" id="feedbackToast" role="alert" aria-live="polite">
+                <div class="toast-tick">✓</div>
+                <div class="toast-txt">
+                  <h4 class="toast-head">მოთხოვნა წარმატებით გაიგზავნა!</h4>
+                  <p class="toast-desc">საცდელი მასალები და ინსტრუქცია გამოგეგზავნათ ელ-ფოსტაზე.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- REFINED MODERN FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-top-row">
+        <div class="footer-brand-box">
+          <a href="#hero" class="brand-logo">
+            <div class="logo-mark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <span class="logo-name">Dev<span class="name-accent">Start</span></span>
+          </a>
+          <p class="footer-pitch">თანამედროვე პლატფორმა პროგრამირების დამწყებთათვის.</p>
+        </div>
+
+        <nav class="footer-links-grid" aria-label="სარდაფის ნავიგაცია">
+          <a href="#about" class="foot-link">რას ისწავლი</a>
+          <a href="#features" class="foot-link">უპირატესობები</a>
+          <a href="#curriculum" class="foot-link">გეგმა</a>
+          <a href="#community" class="foot-link">სტუდენტები</a>
+          <a href="#contact" class="foot-link">კონტაქტი</a>
+        </nav>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom-row">
+        <p class="copyright-text">&copy; 2026 DevStart. ყველა უფლება დაცულია.</p>
+        <div class="footer-badges">
+          <span class="badge-pill">HTML5 / CSS3 / ES2024</span>
+          <span class="badge-pill">WCAG AAA Accessible</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
